@@ -25,12 +25,15 @@ public abstract class InteractionScenario
     #region Protected Methods
 
     protected InteractionScenario DisplayInteractions(IUserInterface ui)
-        => _interactions
-            .Aggregate(this, (scenario, interaction) =>
-            {
-                ui.WriteMessage($"[{interaction.Key}] {interaction.Description}");
-                return scenario;
-            });
+        => ui.WriteEmpty()
+             .Pipe(
+                _ => _interactions
+                        .Aggregate(this, (scenario, interaction) =>
+                        {
+                            ui.WriteMessage($"[{interaction.Key}] {interaction.Description}");
+                            return scenario;
+                        })
+                );
 
     protected static async Task<T> AwaitInput<T>(
         IUserInterface ui,
