@@ -6,14 +6,14 @@ public class HandleIntegerInputInteractionScenario(
     string prompt,
     string invalidInputMessage,
     InteractionScenario onCancelScenario,
-    Func<IntegerInput, Task<Context>> inputHandler,
+    Func<IntegerInput, Context, Task<Context>> inputHandler,
     string? cancelKey = null) : InteractionScenario
 {
     private readonly string _prompt = prompt;
     private readonly string _cancelKey = cancelKey ?? Resources.QuitKey;
     private readonly string _invalidInputMessage = invalidInputMessage;
     private readonly InteractionScenario _onCancelScenario = onCancelScenario;
-    private readonly Func<IntegerInput, Task<Context>> _inputHandler = inputHandler;
+    private readonly Func<IntegerInput, Context, Task<Context>> _inputHandler = inputHandler;
 
     public override async Task<Context> Execute(Context context)
         => await (await AwaitInput(
@@ -30,7 +30,7 @@ public class HandleIntegerInputInteractionScenario(
         )
         .Pipe(input => input switch
             {
-                IntegerInput i => _inputHandler(i),
+                IntegerInput i => _inputHandler(i, context),
                 _ => Async(context with { CurrentScenario = _onCancelScenario })
             }
         ).ConfigureAwait(false);
