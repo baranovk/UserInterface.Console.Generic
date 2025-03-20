@@ -65,8 +65,6 @@ public abstract class InteractionScenario
             _ => Async(Validation<InteractionScenario>.Fail(new ValidationError(Resources.MissingAction)))
         };
 
-    protected static string FormatPrompt(string prompt) => $"{prompt} --> ";
-
     #endregion
 
     #region Public Methods
@@ -74,7 +72,7 @@ public abstract class InteractionScenario
     public virtual async Task<Context> Execute(Context context)
         => await DisplayInteractions(context.UI)
             .Pipe(
-                _ => AwaitInput(context.UI, input => SelectValidInteractionScenario(input), FormatPrompt(Resources.SelectInteraction))
+                _ => AwaitInput(context.UI, input => SelectValidInteractionScenario(input), Resources.SelectInteraction)
                         .Bind(nextScenario => Async(context with { CurrentScenario = nextScenario, Finished = nextScenario is QuitScenario }))
             ).ConfigureAwait(false);
 

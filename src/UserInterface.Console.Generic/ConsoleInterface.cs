@@ -28,5 +28,5 @@ internal sealed class ConsoleInterface
                         return acc;
                     }
                 )
-                .Pipe(acc => { System.Console.Write(acc.memo); return acc.@this; });
+                .Pipe(acc => { System.Console.Write($"{acc.memo} --> "); return acc.@this; });
 }
