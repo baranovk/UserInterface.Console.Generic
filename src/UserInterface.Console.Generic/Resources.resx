@@ -118,15 +118,15 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MissingAction" xml:space="preserve">
-    <value>Выбранное действие отсутствует в списке</value>
+    <value>Selected action is missing in list</value>
   </data>
   <data name="QuitKey" xml:space="preserve">
     <value>Q</value>
   </data>
   <data name="QuitPrompt" xml:space="preserve">
-    <value>Выход</value>
+    <value>Quit</value>
   </data>
   <data name="SelectInteraction" xml:space="preserve">
-    <value>Выберите действие из списка</value>
+    <value>Please select action</value>
   </data>
 </root>

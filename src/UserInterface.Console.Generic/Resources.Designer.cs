@@ -61,7 +61,7 @@ namespace UserInterface.Console.Generic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выбранное действие отсутствует в списке.
+        ///   Looks up a localized string similar to Selected action is missing in list.
         /// </summary>
         internal static string MissingAction {
             get {
@@ -79,7 +79,7 @@ namespace UserInterface.Console.Generic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выход.
+        ///   Looks up a localized string similar to Quit.
         /// </summary>
         internal static string QuitPrompt {
             get {
@@ -88,7 +88,7 @@ namespace UserInterface.Console.Generic {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Выберите действие из списка.
+        ///   Looks up a localized string similar to Please select action.
         /// </summary>
         internal static string SelectInteraction {
             get {

@@ -34,5 +34,5 @@ internal sealed class UserInterface(ConsoleInterface console) : IUserInterface
 
     public IUserInterface WriteMessage(params string[] prompt) => _console.WriteLine(prompt).Pipe(_ => this);
 
-    public IUserInterface WriteEmpty() => _console.WriteLine().Pipe(_ => this);
+    public IUserInterface WriteEmpty() => _console.WriteLine(string.Empty).Pipe(_ => this);
 }
