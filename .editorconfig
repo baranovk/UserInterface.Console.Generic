@@ -73,6 +73,7 @@ csharp_style_expression_bodied_local_functions = false:silent
 dotnet_diagnostic.S1075.severity = suggestion
 dotnet_diagnostic.S2325.severity = suggestion
 dotnet_diagnostic.S2094.severity = suggestion
+dotnet_diagnostic.S127.severity = suggestion
 
 [*.{xml,config,*proj,nuspec,props,resx,targets,yml,tasks}]
 indent_size = 2

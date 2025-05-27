@@ -19,6 +19,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "submodules", "submodules", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Functional", "submodules\Functional\src\Functional\Functional.csproj", "{6251BE76-7C83-4906-B47D-50C0D8939C5E}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CB87EF87-A3E3-48BB-ADA2-6E9329F64EBF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserInterface.Console.Generic.Tests.Unit", "tests\UserInterface.Console.Generic.Tests.Unit\UserInterface.Console.Generic.Tests.Unit.csproj", "{F040D402-224F-4C91-A69C-D9794585D3AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,10 @@ Global
 		{6251BE76-7C83-4906-B47D-50C0D8939C5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6251BE76-7C83-4906-B47D-50C0D8939C5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6251BE76-7C83-4906-B47D-50C0D8939C5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F040D402-224F-4C91-A69C-D9794585D3AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F040D402-224F-4C91-A69C-D9794585D3AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F040D402-224F-4C91-A69C-D9794585D3AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F040D402-224F-4C91-A69C-D9794585D3AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -40,5 +48,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{72FE6606-8471-4F47-B462-65C634B49223} = {E4DC2760-562E-4491-B86A-AC65BF7C7E1D}
 		{6251BE76-7C83-4906-B47D-50C0D8939C5E} = {DE67B66C-BDFB-420C-92BE-547EECF755DA}
+		{F040D402-224F-4C91-A69C-D9794585D3AF} = {CB87EF87-A3E3-48BB-ADA2-6E9329F64EBF}
 	EndGlobalSection
 EndGlobal

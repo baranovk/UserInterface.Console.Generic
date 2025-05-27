@@ -1,7 +1,7 @@
 using Functional;
 using static Functional.F;
 
-namespace UserInterface.Console.Generic;
+namespace UserInterface.Console.Generic.Scenarios;
 
 public abstract class InteractionScenario
 {
@@ -81,8 +81,7 @@ public abstract class InteractionScenario
     #region Private Methods
 
     private Validation<InteractionScenario> FindScenarioByKey(string key)
-        => EnumerableExt
-            .Find(_interactions, i => i.Key.Equals(key, StringComparison.Ordinal))
+        => _interactions.Find(i => i.Key.Equals(key, StringComparison.Ordinal))
             .Match(
                 () => Invalid(new ValidationError(Resources.MissingAction)),
                 interaction => Valid(interaction.Scenario)

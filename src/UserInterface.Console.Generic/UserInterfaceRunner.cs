@@ -1,4 +1,5 @@
 using Functional;
+using UserInterface.Console.Generic.Scenarios;
 using static Functional.F;
 
 namespace UserInterface.Console.Generic;
