@@ -1,3 +1,5 @@
+using UserInterface.Console.Generic.Arguments;
+
 namespace UserInterface.Console.Generic.Tests.Unit;
 
 internal sealed class ArgumentsParsingTests
@@ -6,14 +8,16 @@ internal sealed class ArgumentsParsingTests
     public void ParsingEmptyArgsList_Should_ReturnEmptyArgsDictionary()
     {
         var args = Array.Empty<string>();
-        Assert.That(args.ParseArguments().Keys, Has.Count.EqualTo(0));
+        var parser = new PrefixedArgumentsParser();
+        Assert.That(parser.ParseArguments(args.AsMemory()).Keys, Has.Count.EqualTo(0));
     }
 
     [Test]
     public void ParsingPairedArguments_Should_ReturnArgsDictionaryWithEvenKeysCount()
     {
         var args = new string[] { "-aa", "aaa", "-bb", "bbb" };
-        var argsDict = args.ParseArguments();
+        var parser = new PrefixedArgumentsParser();
+        var argsDict = parser.ParseArguments(args.AsMemory());
 
         Assert.That(argsDict.Keys, Has.Count.EqualTo(2));
         Assert.That(argsDict.ContainsKey("aa"), Is.True);
@@ -26,7 +30,8 @@ internal sealed class ArgumentsParsingTests
     public void ParsingArgumentsWithoutValue_Should_ReturnArgsDictionaryWithEmptyValues()
     {
         var args = new string[] { "-aa", "aaa", "-bb" };
-        var argsDict = args.ParseArguments();
+        var parser = new PrefixedArgumentsParser();
+        var argsDict = parser.ParseArguments(args.AsMemory());
 
         Assert.That(argsDict.Keys, Has.Count.EqualTo(2));
         Assert.That(argsDict.ContainsKey("aa"), Is.True);
@@ -39,7 +44,8 @@ internal sealed class ArgumentsParsingTests
     public void ParsingArgumentsWithMultiWordValue_Should_ReturnArgsDictionaryWithJoinedWordsValues()
     {
         var args = new string[] { "-aa", "aaa1 aaa2", "-bb", "bbb1 bbb2 bbb3", "-cc" };
-        var argsDict = args.ParseArguments();
+        var parser = new PrefixedArgumentsParser();
+        var argsDict = parser.ParseArguments(args.AsMemory());
 
         Assert.That(argsDict.Keys, Has.Count.EqualTo(3));
         Assert.That(argsDict.ContainsKey("aa"), Is.True);
