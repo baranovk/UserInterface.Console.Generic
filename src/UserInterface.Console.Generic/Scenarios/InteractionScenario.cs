@@ -37,18 +37,21 @@ public abstract class InteractionScenario
 
     protected static async Task<T> AwaitInput<T>(
         IUserInterface ui,
-        Func<UserInput, Task<Validation<T>>> reaction,
+        Func<UserInput, CancellationToken, Task<Validation<T>>> reaction,
+        CancellationToken cancellationToken = default,
         params string[] prompt)
-        => (await reaction(ui.GetInput(prompt))
+        => (await reaction(ui.GetInput(prompt), cancellationToken)
                 .IterateUntilAsync(
                     async (validation) =>
                     {
                         validation
-                            .Match(errors => _ = errors.Aggregate(ui.WriteEmpty(), (ui, e) => ui.WriteMessage(e.Message)),
-                            _ => { }
-                        );
+                            .Match(
+                                errors => _ = errors.Aggregate(ui.WriteEmpty(), (ui, e) => ui.WriteMessage(e.Message)),
+                                _ => { }
+                            );
 
-                        return await reaction(ui.GetInput(prompt)).ConfigureAwait(false);
+                        cancellationToken.ThrowIfCancellationRequested();
+                        return await reaction(ui.GetInput(prompt), cancellationToken).ConfigureAwait(false);
                     },
                     _ => _.IsValid
                 ).ConfigureAwait(false)
@@ -69,10 +72,10 @@ public abstract class InteractionScenario
 
     #region Public Methods
 
-    public virtual async Task<Context> Execute(Context context)
+    public virtual async Task<Context> Execute(Context context, CancellationToken cancellationToken = default)
         => await DisplayInteractions(context.UI)
             .Pipe(
-                _ => AwaitInput(context.UI, input => SelectValidInteractionScenario(input), Resources.SelectInteraction)
+                _ => AwaitInput(context.UI, (input, _) => SelectValidInteractionScenario(input), cancellationToken, Resources.SelectInteraction)
                         .Bind(nextScenario => Async(context with { CurrentScenario = nextScenario, Finished = nextScenario is QuitScenario }))
             ).ConfigureAwait(false);
 
@@ -96,5 +99,5 @@ internal sealed class QuitScenario : NoopScenario { }
 
 internal class NoopScenario : InteractionScenario
 {
-    public override Task<Context> Execute(Context context) => Async(context);
+    public override Task<Context> Execute(Context context, CancellationToken cancellationToken = default) => Async(context);
 }

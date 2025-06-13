@@ -6,7 +6,7 @@ namespace UserInterface.Console.Generic;
 
 public static class UserInterfaceRunner
 {
-    public static async Task RunAsync(InteractionScenario entryPointScenario)
+    public static async Task RunAsync(InteractionScenario entryPointScenario, CancellationToken cancellationToken = default)
         => await new ConsoleInterface()
                     .Pipe(@interface
                             => Async(new Context(new UserInterface(@interface), entryPointScenario))

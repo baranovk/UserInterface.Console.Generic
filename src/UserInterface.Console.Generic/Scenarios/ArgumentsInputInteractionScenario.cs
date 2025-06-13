@@ -4,5 +4,5 @@ public abstract class ArgumentsInputInteractionScenario(IDictionary<string, stri
 {
     protected IDictionary<string, string> Arguments { get; private set; } = arguments;
 
-    public abstract override Task<Context> Execute(Context context);
+    public abstract override Task<Context> Execute(Context context, CancellationToken cancellationToken = default);
 }
