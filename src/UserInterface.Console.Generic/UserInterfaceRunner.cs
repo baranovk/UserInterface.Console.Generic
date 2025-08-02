@@ -11,7 +11,8 @@ public static class UserInterfaceRunner
                     .Pipe(@interface
                             => Async(new Context(new UserInterface(@interface), entryPointScenario))
                                 .IterateUntilAsync(
-                                    async ctx => (await TryAsync(() => ctx.CurrentScenario.Execute(ctx)).RunAsync().ConfigureAwait(false))
+                                    async ctx => (await TryAsync(ct => ctx.CurrentScenario.Execute(ctx, cancellationToken))
+                                                    .RunAsync(cancellationToken).ConfigureAwait(false))
                                         .Match(
                                             ex => ctx.UI.WriteEmpty()
                                                         .WriteMessage(ex.ToString())
